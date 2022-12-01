@@ -6,42 +6,27 @@ namespace AdventOfCode2022.Puzzles.Puzzle1
 {
     public class Runner
     {
-        [Fact]
-        public void RunAlphaTest()
+        [Theory]
+        [InlineData("TestInput", 24000L)]
+        [InlineData("Input", 69912L)]
+        public void RunAlpha(string filename, long expected)
         {
-            var actual = Execute("TestInput").MaxBy(x => x.calorieTotal).calorieTotal;
-            actual.Should().Be(24000L);
+            var actual = Execute(filename).MaxBy(x => x.calorieTotal).calorieTotal;
+            actual.Should().Be(expected);
         }
 
-        [Fact]
-        public void RunAlpha()
+        [Theory]
+        [InlineData("TestInput", 45000L)]
+        [InlineData("Input", 208180L)]
+        public void RunBeta(string filename, long expected)
         {
-            var actual = Execute("Input").MaxBy(x => x.calorieTotal).calorieTotal;
-            actual.Should().Be(69912L);
-        }
-
-        [Fact]
-        public void RunBetaTest()
-        {
-            var actual = Execute("TestInput")
+            var actual = Execute(filename)
                 .OrderByDescending(x => x.calorieTotal)
                 .Take(3)
                 .Select(x => x.calorieTotal)
                 .Sum();
 
-            actual.Should().Be(45000L);
-        }
-
-        [Fact]
-        public void RunBeta()
-        {
-            var actual = Execute("Input")
-                .OrderByDescending(x => x.calorieTotal)
-                .Take(3)
-                .Select(x => x.calorieTotal)
-                .Sum();
-         
-            actual.Should().Be(208180L);
+            actual.Should().Be(expected);
         }
 
         private static IEnumerable<(int elfId, long calorieTotal)> Execute(string filename)
