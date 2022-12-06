@@ -26,10 +26,7 @@ public class Runner
 
     private static long Execute(string filename, CheckType checkType)
     {
-        var lines = EmbeddedResourceReader.Read(typeof(Runner).Namespace!.Replace("AdventOfCode2022.Puzzles.", string.Empty), filename)
-            .Replace(Environment.NewLine, "\n")
-            .Replace("\r", "\n")
-            .Split("\n");
+        var lines = EmbeddedResourceReader.Read<Runner>(filename);
 
         long score = 0;
         foreach (var line in lines)

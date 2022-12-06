@@ -4,7 +4,20 @@ namespace AdventOfCode2022.Puzzles.Utils;
 
 internal class EmbeddedResourceReader
 {
-    public static string Read(string folder, string filename)
+    public static string[] Read<T>(string filename)
+    {
+        var folder = typeof(T).Namespace!.Replace("AdventOfCode2022.Puzzles.", string.Empty);
+
+        var lines = Read(folder, filename);
+
+        return lines
+            .Replace(Environment.NewLine, "\n")
+            .Replace("\r", "\n")
+            .Split("\n")
+            .ToArray();
+    }
+
+    private static string Read(string folder, string filename)
     {
         var assembly = Assembly.GetExecutingAssembly();
         var resourceName = $"{typeof(EmbeddedResourceReader).Namespace?.Replace(".Utils", "")}.{folder}.{filename}.txt";

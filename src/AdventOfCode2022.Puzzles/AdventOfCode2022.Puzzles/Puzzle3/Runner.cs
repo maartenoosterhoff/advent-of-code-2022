@@ -38,11 +38,8 @@ public class Runner
 
     private static long Execute(string filename)
     {
-        var lines = EmbeddedResourceReader.Read(typeof(Runner).Namespace!.Replace("AdventOfCode2022.Puzzles.", string.Empty), filename)
-            .Replace(Environment.NewLine, "\n")
-            .Replace("\r", "\n")
-            .Split("\n");
-
+        var lines = EmbeddedResourceReader.Read<Runner>(filename);
+           
         long score = 0;
         var set = GetPrioritySet();
         foreach (var line in lines)
@@ -59,11 +56,7 @@ public class Runner
 
     private static long Execute2(string filename)
     {
-        var lines = EmbeddedResourceReader.Read(typeof(Runner).Namespace!.Replace("AdventOfCode2022.Puzzles.", string.Empty), filename)
-            .Replace(Environment.NewLine, "\n")
-            .Replace("\r", "\n")
-            .Split("\n")
-            .ToArray();
+        var lines = EmbeddedResourceReader.Read<Runner>(filename);
 
         long score = 0;
         var set = GetPrioritySet();

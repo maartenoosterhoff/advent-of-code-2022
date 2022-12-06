@@ -31,10 +31,8 @@ public class Runner
 
     private static IEnumerable<(int elfId, long calorieTotal)> Execute(string filename)
     {
-        var lines = EmbeddedResourceReader.Read(typeof(Runner).Namespace!.Replace("AdventOfCode2022.Puzzles.", string.Empty), filename)
-            .Replace(Environment.NewLine, "\n")
-            .Replace("\r", "\n")
-            .Split("\n");
+        var lines = EmbeddedResourceReader.Read<Runner>(filename);
+
         List<(int elfId, List<long> calories)> data = new();
 
         (int elfId, List<long> calories) current = (1, new List<long>());
